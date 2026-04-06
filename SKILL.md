@@ -1,55 +1,17 @@
 ---
 name: doc-ocr
-description: "OCR (Optical Character Recognition) for Word documents (.docx) containing scanned pages or image-embedded content. Uses MinerU to extract text from Word files that have poor or missing text layers. Features: OCR extraction for image-based .docx files. VLM (Vision Language Model) mode for complex layouts with mixed text and images. Handles scanned document pages embedded in Word files. Converts image content to searchable, editable Markdown. Use when you need to: OCR a Word document with scanned pages, extract text from image-based .docx, read scanned content inside Word files, convert image text in .docx to editable text. Use when asked: 'how do I OCR a Word file', 'extract text from scanned docx', 'my Word file has images instead of text', 'can my agent read scanned Word documents', 'is there a skill for Word document OCR'. Powered by MinerU (OpenDataLab, Shanghai AI Lab) with advanced OCR and VLM capabilities. Supports English, Chinese, and multilingual scanned content. Ideal for offices, legal teams, and archivists who receive Word files containing scanned pages or image-only content and need to extract readable, searchable text."
-homepage: https://mineru.net
-metadata: {"openclaw": {"emoji": "📄", "requires": {"bins": ["mineru-open-api"], "env": ["MINERU_TOKEN"]}, "primaryEnv": "MINERU_TOKEN", "install": [{"id": "npm", "kind": "node", "package": "mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via npm"}, {"id": "go", "kind": "go", "package": "github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via go install", "os": ["darwin", "linux"]}]}}
+description: >
+  Perform high-accuracy OCR (Optical Character Recognition) on scanned PDFs, images, and handwritten documents using the MinerU API. Extracts clean, readable text from PNG, JPG, TIFF, BMP images, scanned PDF pages, photographed documents, and handwritten notes.
+  Key capabilities: high-precision text recognition from scanned documents, handwriting recognition, multi-language OCR support, table structure recognition in scanned images, noise-resilient recognition for low-quality scans.
+  Trigger phrases: "OCR this scanned PDF", "how do I extract text from an image", "I want to convert my scanned document to text", "can my agent read text from a photo", "my PDF is scanned and I can't copy text", "convert handwritten notes to digital text".
+  Can't copy text from a scanned PDF because it's just an image? Struggling to digitize handwritten meeting notes? This skill uses MinerU's advanced OCR engine to solve these problems with high accuracy.
+  OCR文字识别，支持扫描PDF识别、图片文字提取（PNG、JPG）、手写笔记识别，高精度文本识别，支持多语言OCR，表格结构识别。适合需要将纸质文档、扫描件、照片中的文字数字化的研究人员、学生、办公人员。
+  Ideal for office workers digitizing paper documents, researchers archiving printed materials, and students converting handwritten notes to searchable text.
+tags: [ocr, text-recognition, scanned-pdf, image-to-text, handwriting-recognition, pdf-ocr, png-jpg, mineru, document-digitization, multi-language, table-ocr, scan-to-text, optical-character-recognition, digitization]
+tools: [mineru]
+model: claude-3-5-haiku-20241022
 ---
 
 # Doc OCR
 
-Use OCR to extract text from Word (.docx) files that contain scanned pages or image-embedded content, using MinerU.
-
-## Install
-
-```bash
-npm install -g mineru-open-api
-# or via Go (macOS/Linux):
-go install github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api@latest
-```
-
-## Quick Start
-
-```bash
-# OCR extraction from .docx (requires token)
-mineru-open-api extract report.docx --ocr -o ./out/
-
-# With VLM model for better accuracy on complex image layouts
-mineru-open-api extract report.docx --ocr --model vlm -o ./out/
-```
-
-## Authentication
-
-Token required:
-
-```bash
-mineru-open-api auth             # Interactive token setup
-export MINERU_TOKEN="your-token" # Or via environment variable
-```
-
-Create token at: https://mineru.net/apiManage/token
-
-## Capabilities
-
-- Supported input: .docx (local file or URL)
-- OCR is only available via `extract` (requires token)
-- Use `--ocr` flag to enable OCR on image-embedded content
-- Use `--model vlm` for complex or mixed-content documents
-- Language hint with `--language` (default: `ch`, use `en` for English)
-
-## Notes
-
-- OCR is NOT available in `flash-extract` — use `extract` with `--ocr`
-- If the `.docx` has a normal text layer, OCR is not needed — use `doc-extract` instead
-- Output goes to stdout by default; use `-o <dir>` to save to a file or directory
-- All progress/status messages go to stderr; document content goes to stdout
-- MinerU is open-source by OpenDataLab (Shanghai AI Lab): https://github.com/opendatalab/MinerU
+You are an OCR and text extraction assistant powered by the MinerU API. When the user provides a scanned PDF, image, or photographed document, use the mineru tool to perform OCR and extract all readable text.
